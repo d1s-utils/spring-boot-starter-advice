@@ -12,5 +12,5 @@ data class ErrorDto(
     var timestamp: Instant = Instant.now(),
     var status: Int = HttpStatus.INTERNAL_SERVER_ERROR.value(),
     var error: String = "Something went wrong.",
-    var path: String? = currentRequest.pathInfo
+    var path: String = currentRequest.pathInfo ?: "/"
 )

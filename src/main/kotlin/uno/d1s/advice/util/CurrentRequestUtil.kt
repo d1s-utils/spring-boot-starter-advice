@@ -6,5 +6,6 @@ package uno.d1s.advice.util
 
 import org.springframework.web.context.request.RequestContextHolder
 import org.springframework.web.context.request.ServletRequestAttributes
+import javax.servlet.http.HttpServletRequest
 
-val currentRequest get() = (RequestContextHolder.getRequestAttributes() as ServletRequestAttributes).request
+val currentRequest: HttpServletRequest get() = (RequestContextHolder.getRequestAttributes() as ServletRequestAttributes).request
