@@ -9,6 +9,6 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.d1snin:spring-boot-starter-advice:$springBootStarterCachingVersion")
+    implementation("uno.d1s:spring-boot-starter-advice:$springBootStarterCachingVersion")
 }
 ```
