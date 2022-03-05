@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  uno.d1s.advice.autoconfiguration.AdviceAutoConfiguration
+  dev.d1s.advice.autoconfiguration.AdviceAutoConfiguration

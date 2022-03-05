@@ -9,22 +9,26 @@ plugins {
     kotlin("plugin.spring") version "1.6.10"
 }
 
-group = "uno.d1s"
-version = "1.0.1-stable.0"
+group = "dev.d1s"
+version = "1.2.0-stable.0"
 
 repositories {
     mavenCentral()
+    maven(url = "https://jitpack.io/")
 }
 
-extra["springMockkVersion"] = "3.1.0"
+val teabagsVersion: String by project
+val springMockkVersion: String by project
 
 dependencies {
+    implementation("dev.d1s.teabags:teabag-spring-web:$teabagsVersion")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    testImplementation("dev.d1s.teabags:teabag-testing:$teabagsVersion")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("com.ninja-squad:springmockk:${property("springMockkVersion")}")
+    testImplementation("com.ninja-squad:springmockk:$springMockkVersion")
 }
 
 tasks.withType<Test> {
