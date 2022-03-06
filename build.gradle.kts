@@ -75,3 +75,7 @@ publishing {
         }
     }
 }
+
+kotlin {
+    explicitApi = org.jetbrains.kotlin.gradle.dsl.ExplicitApiMode.Warning
+}
