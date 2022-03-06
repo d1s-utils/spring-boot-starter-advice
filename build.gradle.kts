@@ -22,6 +22,7 @@ repositories {
 
 val teabagsVersion: String by project
 val springMockkVersion: String by project
+val striktVersion: String by project
 
 dependencies {
     implementation("dev.d1s.teabags:teabag-spring-web:$teabagsVersion")
@@ -32,6 +33,7 @@ dependencies {
     testImplementation("dev.d1s.teabags:teabag-testing:$teabagsVersion")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("com.ninja-squad:springmockk:$springMockkVersion")
+    implementation("io.strikt:strikt-jvm:$striktVersion")
 }
 
 tasks.withType<Test> {
