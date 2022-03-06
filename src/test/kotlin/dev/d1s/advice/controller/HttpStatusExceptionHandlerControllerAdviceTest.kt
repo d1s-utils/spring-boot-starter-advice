@@ -4,6 +4,7 @@ import dev.d1s.advice.exception.HttpStatusException
 import dev.d1s.teabag.testing.mockResponse
 import dev.d1s.teabag.web.sendErrorDto
 import io.mockk.justRun
+import io.mockk.mockkStatic
 import io.mockk.verify
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
@@ -24,16 +25,18 @@ internal class HttpStatusExceptionHandlerControllerAdviceTest {
         val response = mockResponse
         val testHttpStatusException = HttpStatusException(HttpStatus.CONFLICT, "Uh oh")
 
-        justRun {
-            response.sendErrorDto(any())
-        }
+        mockkStatic("dev.d1s.teabag.web.HttpServletResponseKt") {
+            justRun {
+                response.sendErrorDto(any())
+            }
 
-        assertDoesNotThrow {
-            httpStatusExceptionHandlerControllerAdvice.handleHttpStatusException(testHttpStatusException, response)
-        }
+            assertDoesNotThrow {
+                httpStatusExceptionHandlerControllerAdvice.handleHttpStatusException(testHttpStatusException, response)
+            }
 
-        verify {
-            response.sendErrorDto(any())
+            verify {
+                response.sendErrorDto(any())
+            }
         }
     }
 }
