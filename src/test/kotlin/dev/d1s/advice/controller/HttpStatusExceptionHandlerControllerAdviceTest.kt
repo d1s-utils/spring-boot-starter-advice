@@ -25,7 +25,7 @@ internal class HttpStatusExceptionHandlerControllerAdviceTest {
         val response = mockResponse
         val testHttpStatusException = HttpStatusException(HttpStatus.CONFLICT, "Uh oh")
 
-        mockkStatic("dev.d1s.teabag.web.HttpServletResponseKt") {
+        mockkStatic("dev.d1s.teabag.web.HttpServletResponseExtKt") {
             justRun {
                 response.sendErrorDto(any())
             }
