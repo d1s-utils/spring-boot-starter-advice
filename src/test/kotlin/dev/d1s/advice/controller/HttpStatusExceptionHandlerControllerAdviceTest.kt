@@ -1,7 +1,7 @@
 package dev.d1s.advice.controller
 
 import dev.d1s.advice.exception.HttpStatusException
-import dev.d1s.teabag.testing.mockResponse
+import dev.d1s.teabag.testing.spring.http.mockResponse
 import dev.d1s.teabag.web.sendErrorDto
 import io.mockk.justRun
 import io.mockk.mockkStatic

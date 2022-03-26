@@ -31,9 +31,10 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     testImplementation("dev.d1s.teabags:teabag-testing:$teabagsVersion")
+    testImplementation("dev.d1s.teabags:teabag-testing-spring:$teabagsVersion")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("com.ninja-squad:springmockk:$springMockkVersion")
-    implementation("io.strikt:strikt-jvm:$striktVersion")
+    testImplementation("io.strikt:strikt-jvm:$striktVersion")
 }
 
 tasks.withType<Test> {
