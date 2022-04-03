@@ -1,5 +1,6 @@
 package dev.d1s.advice.controller
 
+import dev.d1s.advice.domain.ErrorResponseData
 import dev.d1s.advice.exception.HttpStatusException
 import dev.d1s.teabag.testing.spring.http.mockResponse
 import dev.d1s.teabag.web.sendErrorDto
@@ -23,7 +24,9 @@ internal class HttpStatusExceptionHandlerControllerAdviceTest {
     @Test
     fun `should handle HttpStatusException`() {
         val response = mockResponse
-        val testHttpStatusException = HttpStatusException(HttpStatus.CONFLICT, "Uh oh")
+        val testHttpStatusException = HttpStatusException(
+            ErrorResponseData(HttpStatus.CONFLICT, "Uh oh")
+        )
 
         mockkStatic("dev.d1s.teabag.web.HttpServletResponseExtKt") {
             justRun {

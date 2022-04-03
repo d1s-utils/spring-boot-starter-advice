@@ -13,7 +13,7 @@ internal class HttpStatusExceptionHandlerControllerAdvice {
     fun handleHttpStatusException(ex: HttpStatusException, response: HttpServletResponse) {
         response.sendErrorDto {
             error = ex.message!!
-            status = ex.status.value()
+            status = ex.data.status.value()
         }
     }
 }

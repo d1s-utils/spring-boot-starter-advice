@@ -1,6 +1,6 @@
 package dev.d1s.advice.exception
 
-import org.springframework.http.HttpStatus
+import dev.d1s.advice.domain.ErrorResponseData
 
-public class HttpStatusException(public val status: HttpStatus, message: String) :
-    RuntimeException(message)
+public open class HttpStatusException(internal val data: ErrorResponseData) :
+    RuntimeException(data.message)
