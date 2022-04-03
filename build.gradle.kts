@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "dev.d1s"
-version = "1.2.2-stable.1"
+version = "1.3.0-stable.0"
 
 java.sourceCompatibility = JavaVersion.VERSION_11
 java.targetCompatibility = JavaVersion.VERSION_11
