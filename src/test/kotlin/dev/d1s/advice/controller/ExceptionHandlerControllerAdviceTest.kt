@@ -6,9 +6,13 @@ import dev.d1s.advice.mapper.ExceptionMapper
 import dev.d1s.teabag.testing.constant.VALID_STUB
 import dev.d1s.teabag.testing.spring.http.mockResponse
 import dev.d1s.teabag.web.sendErrorDto
-import io.mockk.*
+import io.mockk.every
+import io.mockk.justRun
+import io.mockk.mockkStatic
+import io.mockk.verify
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertDoesNotThrow
+import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.http.HttpStatus
@@ -24,10 +28,12 @@ internal class ExceptionHandlerControllerAdviceTest {
     @MockkBean
     private lateinit var mapper: ExceptionMapper
 
+    private val testException = RuntimeException(VALID_STUB)
+
+    private val response = mockResponse
+
     @Test
     fun `should handle exception`() {
-        val testException = RuntimeException(VALID_STUB)
-
         every {
             mapper.map(testException)
         } returns ErrorResponseData(
@@ -35,24 +41,33 @@ internal class ExceptionHandlerControllerAdviceTest {
             VALID_STUB
         )
 
-        val spyResponse = spyk(mockResponse)
-
         mockkStatic("dev.d1s.teabag.web.HttpServletResponseExtKt") {
             justRun {
-                spyResponse.sendErrorDto(any())
+                response.sendErrorDto(any())
             }
 
             assertDoesNotThrow {
-                exceptionHandlerControllerAdvice.handleException(testException, spyResponse)
+                exceptionHandlerControllerAdvice.handleException(testException, response)
             }
 
             verify {
-                spyResponse.sendErrorDto(any())
+                response.sendErrorDto(any())
             }
         }
 
         verify {
             mapper.map(testException)
+        }
+    }
+
+    @Test
+    fun `should throw exception if there is no suitable mapper for it`() {
+        every {
+            mapper.map(testException)
+        } returns null
+
+        assertThrows<RuntimeException> {
+            exceptionHandlerControllerAdvice.handleException(testException, response)
         }
     }
 }

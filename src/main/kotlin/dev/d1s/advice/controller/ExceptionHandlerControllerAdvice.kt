@@ -3,7 +3,6 @@ package dev.d1s.advice.controller
 import dev.d1s.advice.mapper.ExceptionMapper
 import dev.d1s.teabag.web.sendErrorDto
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import javax.servlet.http.HttpServletResponse
@@ -26,10 +25,7 @@ internal class ExceptionHandlerControllerAdvice {
                 status = it.status.value()
             }
         } ?: run {
-            response.sendErrorDto {
-                error = ex.message ?: "No message provided."
-                status = HttpStatus.INTERNAL_SERVER_ERROR.value()
-            }
+            throw ex
         }
     }
 }
