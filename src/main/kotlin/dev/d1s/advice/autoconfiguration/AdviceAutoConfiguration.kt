@@ -1,7 +1,6 @@
 package dev.d1s.advice.autoconfiguration
 
 import dev.d1s.advice.controller.ExceptionHandlerControllerAdvice
-import dev.d1s.advice.controller.HttpStatusExceptionHandlerControllerAdvice
 import dev.d1s.advice.mapper.ExceptionMapper
 import dev.d1s.advice.mapper.defaultImpl.ConstraintViolationExceptionMapper
 import org.springframework.boot.autoconfigure.jackson.JacksonAutoConfiguration
@@ -16,10 +15,6 @@ public class AdviceAutoConfiguration {
     @Bean
     internal fun exceptionHandlerControllerAdvice() =
         ExceptionHandlerControllerAdvice()
-
-    @Bean
-    internal fun httpStatusExceptionHandlerControllerAdvice() =
-        HttpStatusExceptionHandlerControllerAdvice()
 
     @Bean
     internal fun constraintViolationExceptionMapper(): ExceptionMapper =

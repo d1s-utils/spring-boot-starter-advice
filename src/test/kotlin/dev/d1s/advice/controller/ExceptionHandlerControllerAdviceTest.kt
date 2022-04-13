@@ -2,9 +2,10 @@ package dev.d1s.advice.controller
 
 import com.ninjasquad.springmockk.MockkBean
 import dev.d1s.advice.domain.ErrorResponseData
+import dev.d1s.advice.exception.HttpStatusException
 import dev.d1s.advice.mapper.ExceptionMapper
 import dev.d1s.teabag.testing.constant.VALID_STUB
-import dev.d1s.teabag.testing.spring.http.mockResponse
+import dev.d1s.teabag.testing.spring.web.http.mockResponse
 import dev.d1s.teabag.web.sendErrorDto
 import io.mockk.every
 import io.mockk.justRun
@@ -32,31 +33,38 @@ internal class ExceptionHandlerControllerAdviceTest {
 
     private val response = mockResponse
 
+    private val testErrorResponseData = ErrorResponseData(
+        HttpStatus.BAD_REQUEST,
+        VALID_STUB
+    )
+
     @Test
     fun `should handle exception`() {
         every {
             mapper.map(testException)
-        } returns ErrorResponseData(
-            HttpStatus.BAD_REQUEST,
-            VALID_STUB
-        )
+        } returns testErrorResponseData
 
-        mockkStatic("dev.d1s.teabag.web.HttpServletResponseExtKt") {
-            justRun {
-                response.sendErrorDto(any())
-            }
-
-            assertDoesNotThrow {
-                exceptionHandlerControllerAdvice.handleException(testException, response)
-            }
-
-            verify {
-                response.sendErrorDto(any())
-            }
+        this.withStaticMock {
+            exceptionHandlerControllerAdvice.handleException(
+                testException,
+                response
+            )
         }
 
         verify {
             mapper.map(testException)
+        }
+    }
+
+    @Test
+    fun `should handle HttpStatusException`() {
+        this.withStaticMock {
+            exceptionHandlerControllerAdvice.handleException(
+                HttpStatusException(
+                    testErrorResponseData
+                ),
+                response
+            )
         }
     }
 
@@ -68,6 +76,22 @@ internal class ExceptionHandlerControllerAdviceTest {
 
         assertThrows<RuntimeException> {
             exceptionHandlerControllerAdvice.handleException(testException, response)
+        }
+    }
+
+    private inline fun withStaticMock(block: () -> Unit) {
+        mockkStatic("dev.d1s.teabag.web.HttpServletResponseExtKt") {
+            justRun {
+                response.sendErrorDto(any())
+            }
+
+            assertDoesNotThrow {
+                block()
+            }
+
+            verify {
+                response.sendErrorDto(any())
+            }
         }
     }
 }

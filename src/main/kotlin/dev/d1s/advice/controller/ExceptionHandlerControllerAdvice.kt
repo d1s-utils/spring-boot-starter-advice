@@ -1,5 +1,6 @@
 package dev.d1s.advice.controller
 
+import dev.d1s.advice.exception.HttpStatusException
 import dev.d1s.advice.mapper.ExceptionMapper
 import dev.d1s.teabag.web.sendErrorDto
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,6 +16,15 @@ internal class ExceptionHandlerControllerAdvice {
 
     @ExceptionHandler
     fun handleException(ex: Exception, response: HttpServletResponse) {
+        if (ex is HttpStatusException) {
+            response.sendErrorDto {
+                error = ex.message!!
+                status = ex.data.status.value()
+            }
+
+            return
+        }
+
         val responseData = mappers.firstNotNullOfOrNull {
             it.map(ex)
         }

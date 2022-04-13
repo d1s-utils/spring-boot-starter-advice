@@ -5,8 +5,8 @@ plugins {
     id("maven-publish")
     id("org.springframework.boot") version "2.6.2"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
-    kotlin("jvm") version "1.6.10"
-    kotlin("plugin.spring") version "1.6.10"
+    kotlin("jvm") version "1.6.20"
+    kotlin("plugin.spring") version "1.6.20"
 }
 
 group = "dev.d1s"
@@ -31,7 +31,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     testImplementation("dev.d1s.teabags:teabag-testing:$teabagsVersion")
-    testImplementation("dev.d1s.teabags:teabag-testing-spring:$teabagsVersion")
+    testImplementation("dev.d1s.teabags:teabag-testing-spring-web:$teabagsVersion")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("com.ninja-squad:springmockk:$springMockkVersion")
     testImplementation("io.strikt:strikt-jvm:$striktVersion")
