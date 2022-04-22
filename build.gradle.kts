@@ -3,10 +3,10 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("java-library")
     id("maven-publish")
-    id("org.springframework.boot") version "2.6.2"
+    id("org.springframework.boot") version "2.6.7"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
-    kotlin("jvm") version "1.6.20"
-    kotlin("plugin.spring") version "1.6.20"
+    kotlin("jvm") version "1.6.21"
+    kotlin("plugin.spring") version "1.6.21"
 }
 
 group = "dev.d1s"
@@ -25,7 +25,7 @@ val springMockkVersion: String by project
 val striktVersion: String by project
 
 dependencies {
-    implementation("dev.d1s.teabags:teabag-spring-web:$teabagsVersion")
+    api("dev.d1s.teabags:teabag-spring-web:$teabagsVersion")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
