@@ -1,6 +1,6 @@
 package dev.d1s.advice.mapper
 
-import dev.d1s.advice.domain.ErrorResponseData
+import dev.d1s.advice.entity.ErrorResponseData
 
 public interface ExceptionMapper {
 

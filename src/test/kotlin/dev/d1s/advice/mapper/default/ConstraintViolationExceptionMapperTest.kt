@@ -1,6 +1,6 @@
 package dev.d1s.advice.mapper.default
 
-import dev.d1s.advice.domain.ErrorResponseData
+import dev.d1s.advice.entity.ErrorResponseData
 import dev.d1s.advice.mapper.defaultImpl.ConstraintViolationExceptionMapper
 import dev.d1s.teabag.testing.constant.VALID_STUB
 import org.junit.jupiter.api.Test

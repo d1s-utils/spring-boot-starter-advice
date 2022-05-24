@@ -1,7 +1,7 @@
 package dev.d1s.advice.controller
 
 import com.ninjasquad.springmockk.MockkBean
-import dev.d1s.advice.domain.ErrorResponseData
+import dev.d1s.advice.entity.ErrorResponseData
 import dev.d1s.advice.exception.HttpStatusException
 import dev.d1s.advice.mapper.ExceptionMapper
 import dev.d1s.teabag.testing.constant.VALID_STUB
