@@ -1,6 +1,6 @@
 [![](https://jitpack.io/v/d1snin/spring-boot-starter-advice.svg)](https://jitpack.io/#d1snin/spring-boot-starter-advice)
 # spring-boot-starter-advice
-Spring boot starter that provides convenient exception handling, mostly for my projects.
+Spring boot starter that provides convenient exception handling, made it for my projects.
 
 ### Installation
 ```kotlin
