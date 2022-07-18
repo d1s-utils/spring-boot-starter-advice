@@ -7,9 +7,8 @@ import javax.validation.ConstraintViolationException
 
 internal class ConstraintViolationExceptionMapper : ExceptionMapper {
 
-    override fun map(exception: Exception): ErrorResponseData? = if (exception is ConstraintViolationException) {
-        ErrorResponseData(HttpStatus.BAD_REQUEST, exception.message!!)
-    } else {
-        null
-    }
+    override fun map(exception: Exception): ErrorResponseData? =
+        (exception as? ConstraintViolationException)?.let {
+            ErrorResponseData(HttpStatus.BAD_REQUEST, it.message ?: "No message.")
+        }
 }
